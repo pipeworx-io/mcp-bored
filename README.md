@@ -1,35 +1,57 @@
-# @pipeworx/mcp-bored
+# mcp-bored
 
-MCP server for the [Bored API](https://bored-api.appbrewery.com) — random activity suggestions filtered by type or number of participants. Free, no auth required.
+Bored MCP — wraps Bored API (free, no auth)
+
+Part of [Pipeworx](https://pipeworx.io) — an MCP gateway connecting AI agents to 250+ live data sources.
 
 ## Tools
 
 | Tool | Description |
 |------|-------------|
-| `random_activity` | Get a random activity suggestion |
-| `activity_by_type` | Get activity by category (education, social, diy, etc.) |
-| `activity_by_participants` | Get activity for a specific group size |
+| `random_activity` | Get a random activity suggestion to cure boredom. Returns activity name, type, participant count, and price range. |
+| `activity_by_type` | Find a random activity by category (e.g., \'cooking\', \'sport\', \'relaxation\'). Returns activity name, type, participants needed, and price range. |
+| `activity_by_participants` | Find a random activity for a specific group size (e.g., 1 for solo, 4 for group). Returns activity name, type, and price range. |
 
 ## Quick Start
 
-Add to your MCP client config:
+Add to your MCP client (Claude Desktop, Cursor, Windsurf, etc.):
 
 ```json
 {
   "mcpServers": {
     "bored": {
-      "type": "url",
-      "url": "https://gateway.pipeworx.io/bored"
+      "url": "https://gateway.pipeworx.io/bored/mcp"
     }
   }
 }
 ```
 
-## CLI Usage
+Or connect to the full Pipeworx gateway for access to all 250+ data sources:
 
-```bash
-npx @anthropic-ai/mcp-client https://gateway.pipeworx.io/bored
+```json
+{
+  "mcpServers": {
+    "pipeworx": {
+      "url": "https://gateway.pipeworx.io/mcp"
+    }
+  }
+}
 ```
+
+## Using with ask_pipeworx
+
+Instead of calling tools directly, you can ask questions in plain English:
+
+```
+ask_pipeworx({ question: "your question about Bored data" })
+```
+
+The gateway picks the right tool and fills the arguments automatically.
+
+## More
+
+- [All tools and guides](https://github.com/pipeworx-io/examples)
+- [pipeworx.io](https://pipeworx.io)
 
 ## License
 
